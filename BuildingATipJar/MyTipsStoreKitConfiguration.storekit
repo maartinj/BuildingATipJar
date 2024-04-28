@@ -18,6 +18,51 @@
       "productID" : "mj.BuildingATipJar.TinyTip",
       "referenceName" : "Tiny Tip",
       "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "1.99",
+      "familyShareable" : false,
+      "internalID" : "35A2F76C",
+      "localizations" : [
+        {
+          "description" : "Treat me to a slice 🍕",
+          "displayName" : "Gimme a slice",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "mj.BuildingATipJar.SmallTip",
+      "referenceName" : "Small Tip",
+      "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "2.99",
+      "familyShareable" : false,
+      "internalID" : "E29DD428",
+      "localizations" : [
+        {
+          "description" : "Treat me to a BigMac 🍔",
+          "displayName" : "Gimme a burger",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "mj.BuildingATipJar.MediumTip",
+      "referenceName" : "Medium Tip",
+      "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "10.99",
+      "familyShareable" : false,
+      "internalID" : "CA63EAB0",
+      "localizations" : [
+        {
+          "description" : "Ooo you really like me 😘",
+          "displayName" : "Treat me to a steak",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "mj.BuildingATipJar.LargeTip",
+      "referenceName" : "Large Tip",
+      "type" : "Consumable"
     }
   ],
   "settings" : {

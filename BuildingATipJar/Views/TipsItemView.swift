@@ -9,22 +9,24 @@ import SwiftUI
 import StoreKit
 
 struct TipsItemView: View {
+
+    let item: Product?
     
     var body: some View {
         HStack {
             
             VStack(alignment: .leading,
                    spacing: 3) {
-                Text("-")
+                Text(item?.displayName ?? "-")
                     .font(.system(.title3, design: .rounded).bold())
-                Text("-")
+                Text(item?.description ?? "-")
                     .font(.system(.callout, design: .rounded).weight(.regular))
             }
             
             Spacer()
             
-            Button("-") {
-              
+            Button(item?.displayPrice ?? "-") {
+                // TODO: Handle purchase
             }
             .tint(.blue)
             .buttonStyle(.bordered)
@@ -38,6 +40,6 @@ struct TipsItemView: View {
 
 struct TipsItemView_Previews: PreviewProvider {
     static var previews: some View {
-        TipsItemView()
+        TipsItemView(item: nil)
     }
 }

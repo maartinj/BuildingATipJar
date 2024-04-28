@@ -9,6 +9,8 @@ import SwiftUI
 
 struct TipsView: View {
         
+    @EnvironmentObject private var store: TipStore
+
     var didTapClose: () -> ()
     
     var body: some View {
@@ -34,8 +36,8 @@ struct TipsView: View {
                 .multilineTextAlignment(.center)
                 .padding(.bottom, 16)
             
-            ForEach(0...3, id: \.self) { _ in
-                TipsItemView()
+            ForEach(store.items) { item in
+                TipsItemView(item: item)
             }
         }
         .padding(16)
@@ -55,5 +57,6 @@ struct TipsView: View {
 struct TipsView_Previews: PreviewProvider {
     static var previews: some View {
         TipsView {}
+            .environmentObject(TipStore())
     }
 }

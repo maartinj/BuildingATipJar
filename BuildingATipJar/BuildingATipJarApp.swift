@@ -12,8 +12,8 @@ struct BuildingATipJarApp: App {
     
     var body: some Scene {
         WindowGroup {
-//            HomeView()
-            TestView()
+            HomeView()
+//            TestView()
         }
     }
 }

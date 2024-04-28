@@ -10,6 +10,7 @@ import SwiftUI
 struct HomeView: View {
     
     @State private var showTips = false
+    @StateObject private var store = TipStore()
     
     
     var body: some View {
@@ -36,6 +37,7 @@ struct HomeView: View {
                 TipsView {
                     showTips.toggle()
                 }
+                .environmentObject(store)
                 .transition(.move(edge: .bottom).combined(with: .opacity))
             }
         }
