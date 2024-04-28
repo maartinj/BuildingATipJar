@@ -23,7 +23,7 @@
   "settings" : {
     "_failTransactionsEnabled" : false,
     "_locale" : "en_US",
-    "_storefront" : "USA",
+    "_storefront" : "GBR",
     "_storeKitErrors" : [
       {
         "current" : null,
