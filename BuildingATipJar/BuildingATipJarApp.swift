@@ -16,3 +16,5 @@ struct BuildingATipJarApp: App {
         }
     }
 }
+
+// dalej https://youtu.be/azcc3bOcMVo?t=413
