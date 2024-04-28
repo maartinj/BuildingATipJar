@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E47955512BDF005C009B23F3 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47955502BDF005C009B23F3 /* TestView.swift */; };
 		E75870A42925442D00B0AD5F /* BuildingATipJarApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E75870A32925442D00B0AD5F /* BuildingATipJarApp.swift */; };
 		E75870AB2925442E00B0AD5F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E75870AA2925442E00B0AD5F /* Preview Assets.xcassets */; };
 		E79A9071292A224F00C3F7DE /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79A9070292A224F00C3F7DE /* HomeView.swift */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E47955502BDF005C009B23F3 /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		E4E7E6282BDDE1D400F39EC8 /* MyTipsStoreKitConfiguration.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = MyTipsStoreKitConfiguration.storekit; sourceTree = "<group>"; };
 		E75870A02925442D00B0AD5F /* BuildingATipJar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BuildingATipJar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E75870A32925442D00B0AD5F /* BuildingATipJarApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingATipJarApp.swift; sourceTree = "<group>"; };
@@ -66,6 +68,7 @@
 				E79A906F292A224000C3F7DE /* Views */,
 				E75870A32925442D00B0AD5F /* BuildingATipJarApp.swift */,
 				E4E7E6282BDDE1D400F39EC8 /* MyTipsStoreKitConfiguration.storekit */,
+				E47955502BDF005C009B23F3 /* TestView.swift */,
 				E75870A92925442E00B0AD5F /* Preview Content */,
 			);
 			path = BuildingATipJar;
@@ -168,6 +171,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E47955512BDF005C009B23F3 /* TestView.swift in Sources */,
 				E79A9073292A228000C3F7DE /* TipsView.swift in Sources */,
 				E75870A42925442D00B0AD5F /* BuildingATipJarApp.swift in Sources */,
 				E79A9071292A224F00C3F7DE /* HomeView.swift in Sources */,
