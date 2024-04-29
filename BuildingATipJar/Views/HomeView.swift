@@ -60,10 +60,10 @@ struct HomeView: View {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                     showThanks = true
                     store.reset()
-                    // dalej 43:13
                 }
             }
         }
+        .alert(isPresented: $store.hasError, error: store.error) {}
     }
 }
 

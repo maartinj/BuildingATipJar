@@ -8,20 +8,63 @@
 import Foundation
 import StoreKit
 
-enum TipsError: Error {
+enum TipsError: LocalizedError {
     case failedVerification
+    case system(Error)
+    
+    var errorDescription: String? {
+        switch self {
+        case .failedVerification:
+            return "User transaction verification failed"
+        case .system(let err):
+            return err.localizedDescription
+        }
+    }
 }
 
-enum TipsAction {
+enum TipsAction: Equatable {
     case successful
+    case failed(TipsError)
+
+    static func == (lhs: TipsAction, rhs: TipsAction) -> Bool {
+        switch (lhs, rhs) {
+        case (.successful, .successful):
+            return true
+        case (let .failed(lhsErr), let .failed(rhsErr)):
+            return lhsErr.localizedDescription == rhsErr.localizedDescription
+        default:
+            return false
+        }
+    }
 }
 
 typealias PurchaseResult = Product.PurchaseResult
 
+@MainActor
 final class TipStore: ObservableObject {
 
     @Published private(set) var items = [Product]()
-    @Published private(set) var action: TipsAction?
+    @Published private(set) var action: TipsAction? {
+        didSet {
+            switch action {
+            case .failed:
+                hasError = true
+            default:
+                hasError = false
+            }
+        }
+    }
+
+    @Published var hasError = false
+
+    var error: TipsError? {
+        switch action {
+        case .failed(let err):
+            return err
+        default:
+            return nil
+        }
+    }
 
     init() {
         Task { [weak self] in
@@ -35,7 +78,7 @@ final class TipStore: ObservableObject {
             
             try await handlePurchase(from: result)
         } catch {
-            // TODO: Handle Error
+            action = .failed(.system(error))
             print(error)
         }
     }
@@ -47,13 +90,12 @@ final class TipStore: ObservableObject {
 
 private extension TipStore {
 
-    @MainActor
     func retrieveProducts() async {
         do {
             let products = try await Product.products(for: myTipProductIdentifiers).sorted(by: { $0.price < $1.price })
             items = products
         } catch {
-            // TODO: Handle Error
+            action = .failed(.system(error))
             print(error)
         }
     }
