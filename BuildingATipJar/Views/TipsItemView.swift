@@ -10,6 +10,8 @@ import StoreKit
 
 struct TipsItemView: View {
 
+    @EnvironmentObject private var store: TipStore
+
     let item: Product?
     
     var body: some View {
@@ -26,7 +28,11 @@ struct TipsItemView: View {
             Spacer()
             
             Button(item?.displayPrice ?? "-") {
-                // TODO: Handle purchase
+                if let item = item {
+                    Task {
+                        await store.purchase(item)
+                    }
+                }
             }
             .tint(.blue)
             .buttonStyle(.bordered)
@@ -41,5 +47,6 @@ struct TipsItemView: View {
 struct TipsItemView_Previews: PreviewProvider {
     static var previews: some View {
         TipsItemView(item: nil)
+            .environmentObject(TipStore())
     }
 }
