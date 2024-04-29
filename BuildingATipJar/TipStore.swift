@@ -12,11 +12,16 @@ enum TipsError: Error {
     case failedVerification
 }
 
+enum TipsAction {
+    case successful
+}
+
 typealias PurchaseResult = Product.PurchaseResult
 
 final class TipStore: ObservableObject {
 
     @Published private(set) var items = [Product]()
+    @Published private(set) var action: TipsAction?
 
     init() {
         Task { [weak self] in
@@ -33,6 +38,10 @@ final class TipStore: ObservableObject {
             // TODO: Handle Error
             print(error)
         }
+    }
+
+    func reset() {
+        action = nil
     }
 }
 
@@ -57,7 +66,8 @@ private extension TipStore {
 
             let transaction = try checkVerified(verification)
 
-            // TODO: Veridication was ok Update UI
+            action = .successful
+            
             await transaction.finish()
 
         case .pending:
@@ -78,8 +88,6 @@ private extension TipStore {
             throw TipsError.failedVerification
         case .verified(let safe):
             return safe
-
-            // oglądać dalej 31:26: https://youtu.be/azcc3bOcMVo?t=1886
         }
     }
 }

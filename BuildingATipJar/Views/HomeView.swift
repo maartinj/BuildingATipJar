@@ -10,6 +10,8 @@ import SwiftUI
 struct HomeView: View {
     
     @State private var showTips = false
+    @State private var showThanks = false
+
     @StateObject private var store = TipStore()
     
     
@@ -41,7 +43,27 @@ struct HomeView: View {
                 .transition(.move(edge: .bottom).combined(with: .opacity))
             }
         }
+        .overlay(alignment: .bottom) {
+            if showThanks {
+                ThanksView {
+                    showThanks = false
+                }
+                .transition(.move(edge: .bottom).combined(with: .opacity))
+            }
+        }
         .animation(.spring(), value: showTips)
+        .animation(.spring(), value: showThanks)
+        .onChange(of: store.action) { action in
+            if action == .successful {
+                showTips = false
+
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    showThanks = true
+                    store.reset()
+                    // dalej 43:13
+                }
+            }
+        }
     }
 }
 
