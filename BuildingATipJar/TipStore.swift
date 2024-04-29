@@ -39,6 +39,7 @@ enum TipsAction: Equatable {
 }
 
 typealias PurchaseResult = Product.PurchaseResult
+typealias TransactionListener = Task<Void, Error>
 
 @MainActor
 final class TipStore: ObservableObject {
@@ -65,11 +66,19 @@ final class TipStore: ObservableObject {
             return nil
         }
     }
+    
+    private var transactionListener: TransactionListener?
 
     init() {
+        transactionListener = configureTransactionListener()
+
         Task { [weak self] in
             await self?.retrieveProducts()
         }
+    }
+
+    deinit {
+        transactionListener?.cancel()
     }
 
     func purchase(_ item: Product) async {
@@ -89,6 +98,21 @@ final class TipStore: ObservableObject {
 }
 
 private extension TipStore {
+    
+    func configureTransactionListener() -> TransactionListener {
+        Task.detached(priority: .background) { @MainActor [weak self] in
+            do {
+                for await result in Transaction.updates {
+                    let transaction = try self?.checkVerified(result)
+                    self?.action = .successful
+                    await transaction?.finish()
+                }
+            } catch {
+                self?.action = .failed(.system(error))
+                print(error)
+            }
+        }
+    }
 
     func retrieveProducts() async {
         do {
@@ -125,7 +149,7 @@ private extension TipStore {
 
     func checkVerified<T>(_ result: VerificationResult<T>) throws -> T {
         switch result {
-        case .unverified(let signedType, let verificationError):
+        case .unverified:
             print("The verification of the user failed")
             throw TipsError.failedVerification
         case .verified(let safe):
